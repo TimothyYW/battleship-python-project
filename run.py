@@ -22,11 +22,11 @@ class Ship:
         self.positions.append((row, col))
 
     def contains(self, row: int, col: int) -> bool:
-        return (row, col) in self.positions
+        return (row, col) in self.positions
     
     
 class Board:
-    def _init_(self, size: int):
+    def __init__(self, size: int):
         self.size = size
         self.grid = [[CellState.EMPTY for _ in range(size)] 
                      for _ in range(size)]
@@ -130,7 +130,7 @@ class Board:
         return display
     
 class GameController:
-    def _init_(self):
+    def __init__(self):
         self.grid_size = 10
         self.player_board: Optional[Board] = None
         self.computer_board: Optional[Board] = None
@@ -156,11 +156,60 @@ class GameController:
                 raise RuntimeError("Failed to place computer ships")
 
     def _place_player_ships(self):
+        print("\n" + "=" * 80)
+        print("PLACE YOUR SHIPS".center(80))
+        print("=" * 80)
+        print(f"Grid size: {self.grid_size}x{self.grid_size}")
+        
         for name, size in self.ship_config:
-            ship = Ship(name, size)
-            if not self.computer_board.place_ship_random(ship):
-                raise RuntimeError("Failed to place player ships")
+            self._display_player_board_setup()
+            print(f"\nPlace your {name} (size {size})")
+            
+            while True:
+                try:
+                    print("Enter starting coordinate (e.g., A1): ", end="")
+                    coord_input = input().strip()
+                    coord = self.parse_coordinate(coord_input)
+                    
+                    if coord is None:
+                        print("Invalid coordinate format! Use format like A1")
+                        continue
+                    
+                    row, col = coord
+                    if not self.player_board.is_valid_position(row, col):
+                        print(f"Coordinate out of bounds! Grid is {self.grid_size}x{self.grid_size}")
+                        continue
+                    
+                    print("Enter orientation (H for horizontal, V for vertical): ", end="")
+                    orientation_input = input().strip().upper()
+                    
+                    if orientation_input not in ['H', 'V']:
+                        print("Invalid orientation! Enter H or V")
+                        continue
+                    
+                    horizontal = orientation_input == 'H'
+                    
+                    ship = Ship(name, size)
+                    if self.player_board.place_ship(ship, row, col, horizontal):
+                        print(f"{name} placed successfully!")
+                        break
+                    else:
+                        print("Cannot place ship there! Ship overlaps or is too close to another ship.")
+                        print("Try a different position or orientation.")
+                except EOFError:
+                    print("\nGame ended.")
+                    exit(0)
+        
+        self._display_player_board_setup()
+        print("\nAll ships placed! Game starting...")
 
+
+    def _display_player_board_setup(self):
+        print("\n" + "=" * 80)
+        print("YOUR BOARD".center(80))
+        print("=" * 80)
+        self._print_board(self.player_board,False)
+        
     def parse_coordinate(self, input_str: str) -> Optional[Tuple[int, int]]:
         input_str = input_str.strip().upper()
         if len(input_str) < 2:
@@ -274,3 +323,37 @@ class GameController:
             return False
 
         return True
+
+    def run(self):
+            print("=" * 80)
+            print("BATTLESHIPS GAME".center(80))
+            print("=" * 80)
+
+            while True:
+                try:
+                    print("\nEnter grid size (5-15, default 10): ", end="")
+                    size_input = input().strip()
+                    if not size_input:
+                        size = 10
+                    else:
+                        size = int(size_input)
+                        if size < 5 or size > 15:
+                            print("Grid size must be between 5 and 15")
+                            continue
+                    break
+                except (ValueError, EOFError):
+                    print("Invalid input. Using default size 10.")
+                    size = 10
+                    break
+
+            self.setup_game(size)
+
+            while self.play_turn():
+                pass
+
+            self.display_boards()
+            print("\nThanks for playing!")
+
+if __name__ == "__main__":
+    game = GameController()
+    game.run()
