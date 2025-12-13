@@ -143,7 +143,7 @@ class GameController:
         ]
 
     def setup_game(self, size: int):
-        self.grid_size = max(5, min(size, 15))
+        self.grid_size = max(10, min(size, 15))
         self.player_board = Board(self.grid_size)
         self.computer_board = Board(self.grid_size)
         self._place_computer_ships()
@@ -331,21 +331,21 @@ class GameController:
 
             while True:
                 try:
-                    print("\nEnter grid size (5-15, default 10): ", end="")
+                    print("\nEnter grid size (8-15, default 10): ", end="")
                     size_input = input().strip()
                     if not size_input:
                         size = 10
                     else:
                         size = int(size_input)
-                        if size < 5 or size > 15:
-                            print("Grid size must be between 5 and 15")
+                        if size < 8 or size > 15:
+                            print("Grid size must be between 8 and 15")
                             continue
                     break
                 except (ValueError, EOFError):
                     print("Invalid input. Using default size 10.")
                     size = 10
                     break
-
+            print(f"Setting up a {size}x{size} game...")
             self.setup_game(size)
 
             while self.play_turn():
