@@ -1,32 +1,152 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Battleship game
 
-Welcome,
+Welcome to the battleship game, a game runs on the Python terminal.
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **May 26, 2025**
+user will be up against enemy AI, both player and computer will have 5 ships with their own initial and user must destroy all of opponent ships before all of their own ships sunk.
 
-## Reminders
+Here is my project mock up test result.
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+![Battleship game](assets/images/)
 
-## Creating the Heroku app
+[Link to deployed site]()
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+## How to play
 
-1. `heroku/python`
-2. `heroku/nodejs`
+Battleship game based on the project suggestion by code institute.
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+In this version, user need to input their username first.
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+Afterward, player should input their ships coordinate, those are:
 
-Connect your GitHub repository and deploy as normal.
+Battleship, Frigate, Cruiser, Aircraft carrier, and (Sub)marine.
 
-## Constraints
+The player will be able to see their ships placement after input valid coodinates.
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+They will be market with their initial and color:
 
----
+- Battleship
 
-Happy coding!
+- Cruiser
+
+- Destroyer
+
+- Submarine
+
+- Aircraft Carrier
+
+After input the coordinate for each ships, player will be able to input coordinate to where they would like to fire a shot.
+
+If player missed it will display " * ", while if it was a hit it will be shown by X.
+
+While the computer coordinates will be randomize and the player must guess where the ships are.
+
+Player and computer will be take turn to discover the ship location.
+
+In order to win the game either player or computer must sunk all 5 ships.
+
+# Features
+
+## Existing feature
+
+- Customize board
+
+    - Player allowed to choose where do they want to put their board.
+
+    - Different initial for different ships.
+
+    - Allowing player to choose the size of the board.
+
+![Ship Placement example](assets/images/)
+
+![Player board](assets/images/)
+
+- Computer board
+
+    - Computer board will generate random.
+
+    - Computer board will only shows the ship that been hit.
+
+![Computer board](assets/images/)
+
+- Input valdation error:
+
+    - User need to enter the row and col from 0 to 9
+
+![If coordinate above 9 or below 0](assets/images/)
+
+    - User need to pick a valid coordinate
+
+![Invalid message](assets/images/)
+
+- User of colorama:
+
+    - If player and computer missed the message will be highlighted by color
+
+![Missed message](assets/images/)
+
+    - If ship been hit the message will be highlighted also.
+
+![Example of ship been hit](assets/images/)
+
+# Future feature
+
+- Adding colour to the ship.
+
+# Data Model
+
+The based model is from the battleship game with bigger map. Similar system which shows the player board while the empty board belong to the computer.
+
+The create_battlefield will be creating boards for both side, display_battlefield will be displaying player board and computer board, above the board will be written player turn and computer turn.
+
+The board model also make it easier to keep track of the situation combining with create_battlefield and display_battlefield function. 
+
+# Testing
+
+I have used couple of methods to check the game function:
+
+    - passed the code PEP8, no error occur.
+    - Invalid input will be respond with asking for valid numbers or that has not been picked.
+    - Testing through heroku result is no error occur.
+
+# Bugs
+
+## Solved bug
+
+- When I input an alphabet instead of number, it will crash the game. I resolve this by creating message for ValueError and IndexError.
+
+- Map refuse to print out after every turn, just add break command to break the loop.
+
+## Remaining bug
+
+- No bugs remaining.
+
+# Validator test
+
+- PEP 8
+
+    - No error result
+
+# Deployment
+
+This project was deployed through heroku:
+
+Follow the step below:
+
+- Create heroku app
+
+- Add name for the app
+
+- Choose either Europe or United State
+
+- Set the buildbacks first to Python and afterward NodeJS
+
+- Add The key is PORT and the value is 8000 to the Config Vars
+
+- Connect to GitHub and then search for the project by the name
+
+- Click Deploy
+
+# Credit
+
+Code institute suggestion for Project.
+
