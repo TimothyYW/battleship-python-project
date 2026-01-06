@@ -6,9 +6,9 @@ user will be up against enemy AI, both player and computer will have 5 ships wit
 
 Here is my project mock up test result.
 
-![Battleship game](assets/images/)
+![Battleship game](screenshots/mock-up.png)
 
-[Link to deployed site]()
+[Link to deployed site](https://battleship-python-project-f36be265ea44.herokuapp.com/)
 
 ## How to play
 
@@ -36,7 +36,7 @@ They will be market with their initial and color:
 
 After input the coordinate for each ships, player will be able to input coordinate to where they would like to fire a shot.
 
-If player missed it will display " * ", while if it was a hit it will be shown by X.
+If player missed it will display " O ", while if it was a hit it will be shown by X.
 
 While the computer coordinates will be randomize and the player must guess where the ships are.
 
@@ -56,9 +56,9 @@ In order to win the game either player or computer must sunk all 5 ships.
 
     - Allowing player to choose the size of the board.
 
-![Ship Placement example](assets/images/)
+![Ship Placement example](screenshots/ships-placement.png)
 
-![Player board](assets/images/)
+![Player board](screenshots/player-board.png)
 
 - Computer board
 
@@ -66,27 +66,25 @@ In order to win the game either player or computer must sunk all 5 ships.
 
     - Computer board will only shows the ship that been hit.
 
-![Computer board](assets/images/)
+![Computer board](screenshots/computer-board.png)
 
 - Input valdation error:
 
     - User need to enter the row and col from 0 to 9
 
-![If coordinate above 9 or below 0](assets/images/)
+![If coordinate above 15 or below 8](screenshots/invalid-message.png)
 
     - User need to pick a valid coordinate
 
-![Invalid message](assets/images/)
+![Invalid message](screenshots/invalid-coordinate.png)
+    
+    - Ships overlap message.
 
-- User of colorama:
+![Overlap message](screenshots/overlapped.png)
 
-    - If player and computer missed the message will be highlighted by color
+    - X means hit and O means missed.
 
-![Missed message](assets/images/)
-
-    - If ship been hit the message will be highlighted also.
-
-![Example of ship been hit](assets/images/)
+![Example of ship been hit and missed](screenshots/hit-and-missed.png)
 
 # Future feature
 
@@ -95,8 +93,6 @@ In order to win the game either player or computer must sunk all 5 ships.
 # Data Model
 
 The based model is from the battleship game with bigger map. Similar system which shows the player board while the empty board belong to the computer.
-
-The create_battlefield will be creating boards for both side, display_battlefield will be displaying player board and computer board, above the board will be written player turn and computer turn.
 
 The board model also make it easier to keep track of the situation combining with create_battlefield and display_battlefield function. 
 
@@ -112,9 +108,7 @@ I have used couple of methods to check the game function:
 
 ## Solved bug
 
-- When I input an alphabet instead of number, it will crash the game. I resolve this by creating message for ValueError and IndexError.
-
-- Map refuse to print out after every turn, just add break command to break the loop.
+- When input number 8 it automaticly change to 10x10 size.
 
 ## Remaining bug
 
@@ -125,6 +119,14 @@ I have used couple of methods to check the game function:
 - PEP 8
 
     - No error result
+
+# Technology used
+
+- Python
+
+- Heroku
+
+- Visual code studio
 
 # Deployment
 
