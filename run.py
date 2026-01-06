@@ -143,7 +143,7 @@ class GameController:
         ]
 
     def setup_game(self, size: int):
-        self.grid_size = max(10, min(size, 15))
+        self.grid_size = max(8, min(size, 15))
         self.player_board = Board(self.grid_size)
         self.computer_board = Board(self.grid_size)
         self._place_computer_ships()
