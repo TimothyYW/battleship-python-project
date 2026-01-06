@@ -138,6 +138,8 @@ Follow the step below:
 
 - Choose either Europe or United State
 
+- Go to setting
+
 - Set the buildbacks first to Python and afterward NodeJS
 
 - Add The key is PORT and the value is 8000 to the Config Vars

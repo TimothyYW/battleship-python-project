@@ -148,7 +148,7 @@ class GameController:
         self.computer_board = Board(self.grid_size)
         self._place_computer_ships()
         self._place_player_ships()
-
+        
     def _place_computer_ships(self):
         for name, size in self.ship_config:
             ship = Ship(name, size)
@@ -328,7 +328,12 @@ class GameController:
             print("=" * 80)
             print("BATTLESHIPS GAME".center(80))
             print("=" * 80)
-
+            print("How to play:")
+            print("1. Enter coordinates (e.g., A1, B5) to attack the computer.")
+            print("2. The computer will randomly attack you.")
+            print("3. Sink all enemy ships to win!")
+            print("O means miss, X means hit.")
+            print("=" * 80)
             while True:
                 try:
                     print("\nEnter grid size (8-15, default 10): ", end="")
