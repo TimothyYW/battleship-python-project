@@ -1,14 +1,20 @@
+"""Simple terminal Battleship game implementing board, ship placement, shooting, and a main loop."""
+
 import random
 from typing import List, Tuple, Optional
 from enum import Enum
 
 class CellState(Enum):
+    """Possible cell states for display: EMPTY, SHIP, HIT, MISS."""
+
     EMPTY = "."
     SHIP = "S"
     HIT = "X"
     MISS = "O"
     
 class Ship:
+    """Represents a ship with name, size, occupied positions, and hit count."""
+
     def __init__(self, name: str, size: int):
         self.name = name
         self.size = size
@@ -16,16 +22,21 @@ class Ship:
         self.hits: int = 0
 
     def is_sunk(self) -> bool:
+        """Return True when the ship has received hits equal to its size."""
         return self.hits >= self.size
 
     def add_position(self, row: int, col: int):
+        """Record a board coordinate as occupied by this ship."""
         self.positions.append((row, col))
 
     def contains(self, row: int, col: int) -> bool:
+        """Return True if the given coordinate is part of this ship."""
         return (row, col) in self.positions
     
     
 class Board:
+    """Board that tracks cell states and ships and provides placement and shooting logic."""
+
     def __init__(self, size: int):
         self.size = size
         self.grid = [[CellState.EMPTY for _ in range(size)] 
@@ -33,10 +44,12 @@ class Board:
         self.ships: List[Ship] = []
 
     def is_valid_position(self, row: int, col: int) -> bool:
+        """Return True if (row, col) is within the board bounds."""
         return 0 <= row < self.size and 0 <= col < self.size
 
     def can_place_ship(self, row: int, col: int, 
                        size: int, horizontal: bool) -> bool:
+        """Return True if a ship of the given size can be placed at (row,col) without overlapping or touching other ships."""
         if horizontal:
             if col + size > self.size:
                 return False
@@ -69,6 +82,7 @@ class Board:
 
     def place_ship(self, ship: Ship, row: int, col: int, 
                    horizontal: bool) -> bool:
+        """Place `ship` at (row,col) horizontally or vertically and return True on success."""
         if not self.can_place_ship(row, col, ship.size, horizontal):
             return False
 
@@ -85,6 +99,7 @@ class Board:
         return True
 
     def place_ship_random(self, ship: Ship) -> bool:
+        """Attempt random placement for `ship`, returning True on success."""
         attempts = 0
         max_attempts = 1000
         while attempts < max_attempts:
@@ -97,6 +112,7 @@ class Board:
         return False
 
     def make_shot(self, row: int, col: int) -> Tuple[bool, Optional[Ship]]:
+        """Register a shot at (row,col) and return (success, ship) where ship is the hit Ship or None."""
         if not self.is_valid_position(row, col):
             return False, None
 
@@ -115,9 +131,11 @@ class Board:
         return True, None
 
     def all_ships_sunk(self) -> bool:
+        """Return True if every ship on the board is sunk."""
         return all(ship.is_sunk() for ship in self.ships)
 
     def get_display_grid(self, hide_ships: bool = False) -> List[List[str]]:
+        """Return a printable 2D list of the board, hiding ships when requested."""
         display = []
         for row in self.grid:
             display_row = []
@@ -211,6 +229,10 @@ class GameController:
         self._print_board(self.player_board,False)
         
     def parse_coordinate(self, input_str: str) -> Optional[Tuple[int, int]]:
+        """Parse user input like 'A1' or '1A' into (row, col).
+
+        Returns a 0-based (row, col) tuple or None for invalid input.
+        """
         input_str = input_str.strip().upper()
         if len(input_str) < 2:
             return None

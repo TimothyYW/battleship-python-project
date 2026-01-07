@@ -154,3 +154,4 @@ Follow the step below:
 
 Code institute suggestion for Project.
 
+I would like to thank you my mentor Brian Macharia.
