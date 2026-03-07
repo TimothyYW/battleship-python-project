@@ -8,7 +8,7 @@ Here is my project mock up test result.
 
 ![Battleship game](screenshots/mock-up.png)
 
-[Link to deployed site](https://battleship-python-project-f36be265ea44.herokuapp.com/)
+[Link to deployed site](https://web-battleship.up.railway.app/)
 
 ## How to play
 
