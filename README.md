@@ -8,7 +8,7 @@ Here is my project mock up test result.
 
 ![Battleship game](screenshots/mock-up.png)
 
-[Link to deployed site](https://web-battleship.up.railway.app/)
+[Link to deployed site](https://battleship-python-project-onrender-com.onrender.com/)
 
 ## How to play
 
@@ -129,6 +129,39 @@ I have used couple of methods to check the game function:
 - Visual code studio
 
 # Deployment
+This project was deployed through render:
+
+- Create Render Account
+
+- Click New
+
+- Click "Web Service"
+
+- Search for repo and click connect
+
+- Name the app
+
+- Ensure root empty
+
+- Enviornment Python 3
+
+- Region Frankfurt Central Europe
+
+- Branch have to be Main
+
+- Set build in command  pip install -r requirements.txt && npm install
+
+- start command node.js
+
+- Ensure free plan
+
+- Scroll to advance
+
+- Click Add enviornment variable
+    Port = 8000
+    Python_version = 3.10.7
+
+- Click Deploy
 
 This project was deployed through heroku:
 
@@ -155,3 +188,7 @@ Follow the step below:
 Code institute suggestion for Project.
 
 I would like to thank you my mentor Brian Macharia.
+
+Deployment method on Render
+
+- https://code-institute-students.github.io/deployment-docs/15-pp3-deploy/
